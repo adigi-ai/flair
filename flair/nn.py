@@ -10,8 +10,6 @@ from typing import Union, List
 import flair
 from flair import file_utils
 from flair.data import DataPoint
-from flair.datasets import DataLoader
-from flair.training_utils import Result
 
 
 class Model(torch.nn.Module):
@@ -23,23 +21,6 @@ class Model(torch.nn.Module):
         self, data_points: Union[List[DataPoint], DataPoint]
     ) -> torch.tensor:
         """Performs a forward pass and returns a loss tensor for backpropagation. Implement this to enable training."""
-        pass
-
-    @abstractmethod
-    def evaluate(
-        self,
-        data_loader: DataLoader,
-        out_path: Path = None,
-        embedding_storage_mode: str = "none",
-    ) -> (Result, float):
-        """Evaluates the model. Returns a Result object containing evaluation
-        results and a loss value. Implement this to enable evaluation.
-        :param data_loader: DataLoader that iterates over dataset to be evaluated
-        :param out_path: Optional output path to store predictions
-        :param embedding_storage_mode: One of 'none', 'cpu' or 'gpu'. 'none' means all embeddings are deleted and
-        freshly recomputed, 'cpu' means all embeddings are stored on CPU, or 'gpu' means all embeddings are stored on GPU
-        :return: Returns a Tuple consisting of a Result object and a loss float value
-        """
         pass
 
     @abstractmethod

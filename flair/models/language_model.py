@@ -6,8 +6,6 @@ import math
 from typing import Union, Tuple
 from typing import List
 
-from torch.optim import Optimizer
-
 import flair
 from flair.data import Dictionary
 
@@ -241,27 +239,6 @@ class LanguageModel(nn.Module):
             "loss": loss,
             "optimizer_state_dict": optimizer_state_dict,
         }
-
-    def save_checkpoint(
-        self, file: Path, optimizer: Optimizer, epoch: int, split: int, loss: float
-    ):
-        model_state = {
-            "state_dict": self.state_dict(),
-            "dictionary": self.dictionary,
-            "is_forward_lm": self.is_forward_lm,
-            "hidden_size": self.hidden_size,
-            "nlayers": self.nlayers,
-            "embedding_size": self.embedding_size,
-            "nout": self.nout,
-            "document_delimiter": self.document_delimiter,
-            "dropout": self.dropout,
-            "optimizer_state_dict": optimizer.state_dict(),
-            "epoch": epoch,
-            "split": split,
-            "loss": loss,
-        }
-
-        torch.save(model_state, str(file), pickle_protocol=4)
 
     def save(self, file: Path):
         model_state = {

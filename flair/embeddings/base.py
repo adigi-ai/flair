@@ -6,7 +6,7 @@ import torch
 import logging
 
 import flair
-from flair.data import Sentence, Image
+from flair.data import Sentence
 
 
 log = logging.getLogger("flair")
@@ -40,7 +40,7 @@ class Embeddings(torch.nn.Module):
         are non-static."""
 
         # if only one sentence is passed, convert to list of sentence
-        if (type(sentences) is Sentence) or (type(sentences) is Image):
+        if (type(sentences) is Sentence):
             sentences = [sentences]
 
         everything_embedded: bool = True
